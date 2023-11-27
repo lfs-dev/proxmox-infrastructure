@@ -1,6 +1,6 @@
 # Resumo do Projeto
 
-Projeto de Infraestrutura como Código, que utiliza o **Packer** para a criação de templates personalizados (Docker, Docker Compose, Python e Ansible) e o **Terraform** para provisionamento de infraestrutura escalável em servidores locais com **Proxmox**. 
+Projeto de Infraestrutura como Código, que utiliza o **Packer** para a criação de templates personalizados (com Docker, Docker Compose, Python e Ansible) e o **Terraform** para provisionamento de infraestrutura escalável em servidores locais com **Proxmox**. 
 
 ## 🔨 Funcionalidades do Projeto
 
@@ -26,7 +26,7 @@ Projeto de Infraestrutura como Código, que utiliza o **Packer** para a criaçã
 
 ## 🛠️ Instalação
 
-Clone ou faça o download do repositório [packer](https://github.com/lfs-dev/proxmox-infrastructure/tree/main/packer/ubuntu2204-docker-ansible) e siga o passo a passo do README.md.
+Clone ou faça o download do repositório [Packer](https://github.com/lfs-dev/proxmox-infrastructure/tree/main/packer/ubuntu2204-docker-ansible) e siga o passo a passo do README.md.
 
 > Caso baixou o zip, extraia o projeto antes de procurá-lo, pois não é possível abrir via arquivo zip
 
