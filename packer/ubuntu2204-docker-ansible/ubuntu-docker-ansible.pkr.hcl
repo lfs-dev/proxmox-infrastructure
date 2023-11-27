@@ -35,7 +35,7 @@ source "proxmox-iso" "ubuntu-docker-ansible" {
     
     # Configurações Gerais da VM
     node = "pve" #Node do Proxmox
-    vm_id = "830" #Número do Template
+    vm_id = "900" #Número do Template
     vm_name = "ubuntu-server-2204-docker-ansible" #Nome do Template
     template_description = "Ubuntu Server Com Docker e Ansible" #Descrição do Template
 
@@ -96,10 +96,10 @@ source "proxmox-iso" "ubuntu-docker-ansible" {
     http_directory = "http" 
 
     # Nome do usuário SSH
-    ssh_username = "<user>" 
+    ssh_username = "packer" 
 
     # (Opção 1) Senha do SSH
-    # ssh_password = "<password>"
+    # ssh_password = "teste123"
 
     # (Opção 2) Adicionar a chave SSH Privada
     ssh_private_key_file = "~/.ssh/id_rsa" #Local onde está a sua chave SSH Privada

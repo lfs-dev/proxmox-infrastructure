@@ -42,15 +42,14 @@ resource "proxmox_virtual_environment_vm" "ubuntu_vm" {
       }
     }
 
-  # Usuário padrão da(s) VMs
-  user_account {
-      password = "<user>" #Usuário 
-      username = "<password>" #Senha
-    }
-  }
-
   # Rede predefinida no Proxmox
   network_device {
     bridge = "vmbr0"
+  }
+  # Usuário padrão da(s) VMs
+  user_account {
+      username = "packer" #Usuário 
+      password = "teste123" #Senha
+    }
   }
 }

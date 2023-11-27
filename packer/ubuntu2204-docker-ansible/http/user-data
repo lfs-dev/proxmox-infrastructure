@@ -22,11 +22,11 @@ autoinstall:
     package_upgrade: false
     timezone: America/Sao_Paulo
     users:
-      - name: <user> #Usuário padrão da VM
+      - name: packer #Usuário padrão da VM
         groups: [adm, sudo]
         lock-passwd: false
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
-        # passwd: <password>
+        # passwd: teste123
         ssh_authorized_keys:
-          - <sua-chave-ssh-privada>
+          - <sua-chave-ssh-pública>

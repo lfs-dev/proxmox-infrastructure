@@ -1,73 +1,40 @@
-# INSTRUÇÕES
+# Resumo do Projeto
 
-## O que é o Terraform?
-O Terraform é uma ferramenta de código aberto para infraestrutura como código (IaC) que permite aos desenvolvedores e operadores provisionar e gerenciar recursos de infraestrutura de forma automatizada e declarativa. 
+Projeto de Infraestrutura como Código, que utiliza o **Packer** para a criação de templates personalizados (Docker, Docker Compose, Python e Ansible) e o **Terraform** para provisionamento de infraestrutura escalável em servidores locais com **Proxmox**. 
 
-## Para que serve código?
-Este código serve para provisionar VMs baseadas em templates presentes no Proxmox. Os templates utilizados neste projeto foram criados com o [Packer](https://gitlab.com/public-lfsdev/proxmox/packer-docker-ansible), que também está disponível aqui no GitLab. Portanto, antes de utilizar este código certifique-se de ter um template pré configurado em seu Proxmox e que **seja compatível** com as configurações de máquina. **Os recursos provisionados no template não devem ser menores do que os criados pelo Terraform**.
+## 🔨 Funcionalidades do Projeto
 
-## 1. (Opcional) Acessar a página do Proxmox, Datacenter e criar um usuário para utilizar o Terraform.
-Em um ambiente de desenvolvimento é importante criar novos usuários e regras de acesso, prezando em manter a segurança dos servidores. Este código foi utilizado em um ambiente de teste, portanto diversas medidas de segurança foram omitidas. 
+- Gerar templates personalizados que permitem a criação de máquinas virtuais pré configuradas com Docker, Docker Compose, Python e Ansible.
+- Provisionamento de máquinas virtuais de forma rápida, eficiente e confiável para ambientes de desenvolvimento de software.
 
-## 2. Criar um API Token dentro do Proxmox para a utilização do Terraform e **copiar o token**.
-O *token* é o que irá permitir com que o Terraform acesse o Proxmox e realize a autenticação, o que posteriormente permitirá a criação de VMs.
+## ✔️ Tecnologias e Ferramentas utilizadas
 
-## 3. Acessar o arquivo *credentials.auto.tfvars* e alterar as variáveis:
-Essas variáveis são adquiridas através do passo anterior, durante a criação do Token.
-```
-proxmox_api_url = "http://<ip>:<porta>/api2/json"
-proxmox_api_token_id = "<user-name>@pam!<token-name>"
-promox_api_token_secret = "<seu-token>"
-```
-## 4. Acessar o arquivo *full-clone.tf* e fazer as alterações necessárias:
-Faça a alteração de todas as variáveis utilizando como base o seu Template e o Proxmox.
-```
-target_node = "<nome-do-node-dentro-do-proxmox>"
+- **Proxmox**: sistema de gerenciamento de máquinas virtuais para servidores dedicados.
+- **Packer**: criar imagens de sistemas operacionais pré-configurados, aplicativos e ambientes de software de maneira programática e replicável.
+- **Terraform**: provisionar e gerenciar recursos de infraestrutura de forma automatizada e declarativa.
 
-clone = "<nome-do-template-presente-no-proxmox>"
-```
-**Obs:** O Processador, Memória, Rede e Disco devem ser **iguais ou maiores** aos do template.
+## 📁 Requisitos
 
-**Obs 2:** Não testei a possibilidade de definir uma rede diferente do pré-definido no template.
-```
-ipconfig0 = "ip=<ipv4-da-vm>/16,gw=<gateway-padrao>"
-```
-**Obs:** Lembre-se de manter a VM dentro da mesma rede do Proxmox, respeitando a máscara de sub-rede (neste caso, 2 octetos). O Gateway Padrão geralmente é a saida da rede, que em redes domésticas é o IPv4 do roteador, normalmente com o número de host 1 (último octeto). Se estiver na dúvida utilize o `ifconfig` ou `hostname -I`.
-```
-ciuser = "<usuario-padrão-da-vm>"
-cipassword = "<senha-do-usuario>"
-```
-**Obs:** Este usuário vai ser utilizado para o acesso via SSH.
-```
-sshkeys = <<EOF
-<sua-chave-ssh-publica-que-permitirá-acessar-todas-as-vms>
-EOF
-```
-**Obs** Essa chave SSH irá permitir que o usuário realize a autenticação via ssh para acessar a máquina. Novas chaves podem ser adicionadas para a utilização de outros usuários.
+1. Tenha o Proxmox instalado e configurado em uma máquina dedicada. Você pode a versão mais recente do **Proxmox VE** diretamente do site [Oficial](https://www.proxmox.com/en/downloads). 
+> O Proxmox utiliza recursos de virtualização, então ele **não pode** ser criado dentro de uma máquina virtual. 
 
-## 5. Iniciando o Terraform e download dos plugins (dentro da pasta do projeto):
-Este comando irá fazer o download dos plugins necessários para que o Terraform possa interagir com o Proxmox, os quais estarão presentes em uma pasta *.terraform*. 
-```
-terraform init
-```
-## 6. Criando VM (dentro da pasta do projeto):
-Após o primeiro comando, será mostrada uma imagem contendo todos as informações referêntes as máquinas que serão criadas. 
-```
-terraform apply
-yes
-```
-## 7. Após a criação, as VMs podem ser acessadas a partir do console do Proxmox ou via SSH através do terminal:
-Após a criação das VMs, o Terraform enviará uma mensagem de confirmação.Depois disso, elas podem ser acessadas pelo próprio Proxmox console ou através do SSH. Como no exemplo abaixo:
-```
-ssh <ciuser>@<ipv4-da-vm>
-```
+2. Faça a instalação do Packer. A documentação pode ser encontrada diretamente no site oficial do [Packer](https://developer.hashicorp.com/packer/tutorials/docker-get-started/get-started-install-cli).
 
-## 8. Destruir a(s) VM(s):
-Terminado os testes, você pode estar apagando as VMs e todo seu conteúdo através do comando abaixo. Mas atenção, este processo é **irreversível**.
-```
-terraform destroy
-yes
-```
+3. Faça a instalação do Terraform. A documentação pode ser encontrada diretamente no site oficial do [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 
+> É ***extremamente recomendado*** que a máquina principal que realizará as ações com o Packer e o Terraform tenha uma distro **linux** instalada, pois ocorrem diversos bugs na versão para Windows. 
+
+## 🛠️ Instalação
+
+Clone ou faça o download do repositório [packer](https://github.com/lfs-dev/proxmox-infrastructure/tree/main/packer/ubuntu2204-docker-ansible) e siga o passo a passo do README.md.
+
+> Caso baixou o zip, extraia o projeto antes de procurá-lo, pois não é possível abrir via arquivo zip
+
+Depois de criado o template com o Packer, clone/download do repositório do Terraform conforme sua **versão do Proxmox**. Para as versões 8.0 ou superiores, utilize o [btg-terraform](https://github.com/lfs-dev/proxmox-infrastructure/tree/main/terraform/btg-terraform), o qual utiliza plugins mais recentes e será atualizada com maior frequencia. Caso você esteja usando versões abaixo do 8.0, utilize o repositório [telmate-terraform](https://github.com/lfs-dev/proxmox-infrastructure/tree/main/terraform/telmate-terraform).
+
+> Busque utilizar sempre a versão mais recente de todas as aplicações, evitando ser alvo de vulnerabilidades. 
+
+---
 ___
-### _Fique a vontade para fazer alterações e adicionar novas funcionalidades._
+## Fique a vontade para dar fork e aplicar melhorias!
+### Contato: [LinkedIn](https://www.linkedin.com/in/lfsdev/) | [Telegram](https://t.me/lucaslfsdev) | [Discord](https://discord.gg/qz28z7zrY2)
