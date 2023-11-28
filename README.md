@@ -1,4 +1,8 @@
-# Resumo do Projeto
+<h1 align="center">
+  <br>Proxmox Infrastructure - LFS|DEV
+</h1>
+
+## 📚  Resumo do Projeto
 
 Projeto de Infraestrutura como Código, que utiliza o **Packer** para a criação de templates personalizados (com Docker, Docker Compose, Python e Ansible) e o **Terraform** para provisionamento de infraestrutura escalável em servidores locais com **Proxmox**. 
 
@@ -36,5 +40,19 @@ Depois de criado o template com o Packer, clone/download do repositório do Terr
 
 ---
 ___
-## Fique a vontade para dar fork e aplicar melhorias!
-### Contato: [LinkedIn](https://www.linkedin.com/in/lfsdev/) | [Telegram](https://t.me/lucaslfsdev) | [Discord](https://discord.gg/qz28z7zrY2)
+## 💼 Autor
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/lfs-dev">
+        <img src="https://github.com/lfs-dev.png" width="150px;" alt="Foto Lucas F. Santos"/><br>
+        <sub>
+          <b>LFS | DEV</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+[LinkedIn](https://www.linkedin.com/in/lfsdev/) | [Telegram](https://t.me/lucaslfsdev) | [Discord](https://discord.gg/qz28z7zrY2)
